@@ -65,7 +65,7 @@ CREATE FUNCTION  check_password()
   /*Topics******************************/
 CREATE TABLE TOPICS(
   topic_id serial PRIMARY key,
-  description char(40)
+  description char(40) NOT NULL
 );
 
 
@@ -83,8 +83,8 @@ CREATE TABLE WATCHES(
   userid INT NOT NULL,
   movie_id INT NOT NULL,
   CONSTRAINT userid_fkey FOREIGN KEY(userid)
-  REFERENCES USERS (userid),
-  CONSTRAINT movie_id FOREIGN KEY(movie_id)
+  REFERENCES USERS (userid) ON UPDATE CASCADE ON DELETE CASCADE,
+  CONSTRAINT movie_id FOREIGN KEY(movie_id) ON UPDATE CASCADE
   REFERENCES MOVIE(movie_id),
   language char(30),
   subtitles boolean,
