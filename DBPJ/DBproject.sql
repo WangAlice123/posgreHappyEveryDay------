@@ -71,10 +71,11 @@ CREATE TABLE TOPICS(
 
 /*MOVIES*******************************/
 
-CREATE TABLE MOVIE(
+CREATE TABLE MOVIE
+(
   movie_id serial PRIMARY key,
   name char(50) NOT NULL UNIQUE,
-  date_released DATE NOT NULL,
+  date_released DATE NOT NULL
 
 );
 
@@ -92,3 +93,45 @@ CREATE TABLE WATCHES(
 
 
 );
+
+
+CREATE TABLE DIRECTOR
+	(director_id serial NOT NULL ,
+	lastname character varying(20),
+	firstname character varying(20),
+    country character varying(20),
+	CONSTRAINT Directors_pkey PRIMARY KEY (director_id)
+	);
+	
+CREATE TABLE DIRECTS
+	(director_id integer NOT NULL,
+	 movie_id integer NOT NULL,
+	
+	CONSTRAINT Direct_pkey PRIMARY KEY (director_id,movie_id),
+		CONSTRAINT Directs_Director_fkey FOREIGN KEY (director_id)
+		REFERENCES Director (director_id)
+		ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT Directs_movies_fkey FOREIGN KEY (movie_id)
+		REFERENCES MOVIE (movie_id)
+		ON UPDATE CASCADE ON DELETE CASCADE
+	);
+	
+	CREATE TABLE STUDIO
+	(studio_id serial NOT NULL,
+	name character varying(20),
+    country character varying(20),
+	CONSTRAINT Studio_pkey PRIMARY KEY (studio_id)
+	);
+	
+CREATE TABLE Sponsors
+	(studio_id integer NOT NULL,
+	 movie_id integer NOT NULL,
+	
+	CONSTRAINT Directs_pkey PRIMARY KEY (studio_id,movie_id),
+		CONSTRAINT Sponsors_StudioID_fkey FOREIGN KEY (studio_id)
+		REFERENCES STUDIO (studio_id)
+		ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT Sponsors_movies_fkey FOREIGN KEY (movie_id)
+		REFERENCES MOVIE (movie_id)
+		ON UPDATE CASCADE ON DELETE CASCADE
+	);
