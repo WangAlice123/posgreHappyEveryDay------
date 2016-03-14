@@ -69,7 +69,7 @@ CREATE TABLE TOPICS(
 );
 
 
-/*MOVIES******************************/
+/*MOVIES*******************************/
 
 CREATE TABLE MOVIE(
   movie_id serial PRIMARY key,
