@@ -151,8 +151,8 @@ CREATE TABLE Sponsors
 /*Movie Topics*/
 
 Create Table MovieTopics (
-TopicID INT(10) NOT NULL,
-MovieID INT(10) NOT NULL,
+TopicID INT NOT NULL,
+MovieID INT NOT NULL,
 Language VARCHAR(20),
 Subtitles CHAR(1) NOT NULL,
 Country VARCHAR(20),
@@ -164,7 +164,7 @@ Check (Subtitles = 'Y' or Subtitles = 'N')
 
 /*Actor*/
 Create Table Actor (
-ActorID INT(10) NOT NULL,
+ActorID INT NOT NULL,
 Last_Name VARCHAR(20),
 First_Name VARCHAR(20),
 DateOfBirth DATE,
@@ -174,20 +174,22 @@ Primary key (ActorID)
 
 /*Role*/
 Create Table Role(
-RoleID INT(10) NOT NULL,
+RoleID INT NOT NULL,
 Name VARCHAR(20),
-ActorID INT(10) NOT NULL,
+ActorID INT NOT NULL,
 Primary Key(RoleID),
 Foreign Key (ActorID) References Actor,
-Foreign Key (ActorID) References ActorPlays
+Foreign Key (MovieID) References ActorPlays
 );
 
 
 /*ActorPlays*/
 Create Table ActorPlays(
-MovieID INT(10) NOT NULL,
-ActorID INT(10) NOT NULL,
+MovieID INT NOT NULL,
+ActorID INT NOT NULL,
 Primary Key (MovieID, ActorID)
 );
-
+ Drop TABLE ActorPlays;
+ Drop TABLE Actor;
+ Drop TABLE MovieTopics;
  
