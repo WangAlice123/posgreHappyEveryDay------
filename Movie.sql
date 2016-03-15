@@ -1,34 +1,34 @@
 Create Table MovieTopics (
-TopicID INT(10) NOT NULL,
-MovieID INT(10) NOT NULL,
-Language VARCHAR(20),
-Subtitles CHAR(1) NOT NULL,
-Country VARCHAR(20),
-Primary Key (TopicID, MovieID),
-Check (Subtitles = 'Y' or Subtitles = 'N')
+	topic_id SERIAL NOT NULL,
+	movie_id  serial NOT NULL,
+	language char(30),
+	subtitles boolean,
+	Country VARCHAR(20),
+	Primary Key (topic_id, movie_id),
+	Foreign Key (topic_id) References TOPICS ON UPDATE CASCADE ON DELETE CASCADE,
+	Foreign Key (movie_id) References MOVIE ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 Create Table Actor (
-ActorID INT(10) NOT NULL,
-Last_Name VARCHAR(20),
-First_Name VARCHAR(20),
-DateOfBirth DATE,
-Primary key (ActorID)
+	ActorID serial NOT NULL,
+	Last_Name VARCHAR(20),
+	First_Name VARCHAR(20),
+	DateOfBirth DATE,
+	Primary key (ActorID)
 );
 
 Create Table Role(
-RoleID INT(10) NOT NULL,
-Name VARCHAR(20),
-ActorID INT(10) NOT NULL,
-Primary Key(RoleID),
-Foreign Key (ActorID) References Actor,
-Foreign Key (ActorID) References ActorPlays
+	RoleID SERIAL NOT NULL,
+	Name VARCHAR(20),
+	ActorID serial NOT NULL,
+	Primary Key(RoleID),
+	Foreign Key (ActorID) References Actor ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 Create Table ActorPlays(
-MovieID INT(10) NOT NULL,
-ActorID INT(10) NOT NULL,
-Primary Key (MovieID, ActorID)
+	movie_id  serial NOT NULL,
+	ActorID serial NOT NULL,
+	Primary Key (movie_id , ActorID),
+	Foreign Key (ActorID) References Actor ON UPDATE CASCADE ON DELETE CASCADE,
+	Foreign Key (movie_id) References MOVIE ON UPDATE CASCADE ON DELETE CASCADE
 );
- 
- 
