@@ -7,6 +7,16 @@ SET SEARCH_PATH='movedb';
 
 DROP TABLE USERS;
 /*Users*****************************************************/
+CREATE SEQUENCE your_seq;
+CREATE TABLE IF NOT EXISTS "category" (
+  "id" integer PRIMARY KEY default nextval('your_seq'),
+  "name" varchar(30) DEFAULT NULL
+);
+
+
+
+
+
 CREATE TABLE USERS(
   UserID SERIAL PRIMARY KEY,
   password CHAR(20) NOT NULL,
@@ -192,4 +202,3 @@ Primary Key (MovieID, ActorID)
  Drop TABLE ActorPlays;
  Drop TABLE Actor;
  Drop TABLE MovieTopics;
- 

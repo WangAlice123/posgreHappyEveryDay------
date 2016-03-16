@@ -1,0 +1,29 @@
+
+CREATE DATABASE CSI2132PJ;
+
+CREATE SCHEMA MOVEDB;
+SET SEARCH_PATH='movedb';
+
+DROP TABLE TEST CASCADE;
+DROP SEQUENCE UID;
+/*Users*****************************************************/
+CREATE SEQUENCE UID;
+CREATE TABLE TEST (
+  "id" SERIAL PRIMARY KEY nextval('UID'),
+  "name" varchar(30) DEFAULT NULL
+);
+alter sequence UID owned by TEST.id;
+
+INSERT INTO category
+VALUES(2,'rAY');
+SELECT * FROM category;
+
+SELECT category(pg_get_serial_sequence('your_seq', 'id'));
+
+CREATE SEQUENCE your_seq;
+CREATE TABLE category (
+  "id" integer PRIMARY KEY default nextval('your_seq'),
+  "name" varchar(30) DEFAULT NULL
+);
+
+alter sequence your_seq owned by category.id;
